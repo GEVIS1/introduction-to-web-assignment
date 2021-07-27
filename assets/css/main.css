@@ -1,0 +1,30 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #b3c041;
+    grid-template-rows: repeat(2, 50%);
+}
+
+.box {
+    background-color: #2f6d2f;
+    size: 20px 20px;
+    padding: 20vw;
+    margin: 20px;
+}
+
+.row1 {
+    display:grid;
+    grid-template-columns: repeat(2, 50%);
+    /*grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;*/
+    float: left;
+}
+
+.row2 {
+    display:grid;
+    grid-template-columns: repeat(3, 33.33%);
+    /*grid-row-start: 2;
+    grid-row-end: 3;*/
+    float: left; 
+}
