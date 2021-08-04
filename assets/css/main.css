@@ -1,50 +1,42 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #b3c041;
+    background-color: rgb(205,163,76);
     margin: 0;
 }
 
 .grid {
+    display: grid;
+    grid-template-rows: calc(100% / 12);
     width: 100vw;
     height: 100vh;
-    background-color: #b3c041;
 }
 
-.box {
+.page {
     display:flex;
     justify-content: center;
     align-items: center;    
-    background-color: #2f6d2f;
+    background-color:rgb(69, 89, 52)
 }
 
-.gridsection{
-    width: 100%;
+.p1{
+    grid-area: span;
 }
 
-.upper{
-    height: 60%;
-    display: grid;
-    grid-template-columns: 50% 50%;
-}
+.p2{}
 
-.lower{
-    height: 40%;
-    display: grid;
-    grid-template-columns: 33.333% 33.333% 33.333%;
-}
+.p3{}
 
-.upper .box{
-    margin: 10% 5% 5%;
-}
+.p4{}
 
-.lower .box{
-    margin: 5% 10% 10%;
-}
+.p5{}
 
 
 /* for future ref
 
     instead of saying 33.333%
     width: calc(100% / 3)
+
+    background color: rgb(205,163,76)
+    box color: rgb(69, 89, 52)
 
 */
