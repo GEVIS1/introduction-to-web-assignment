@@ -27,11 +27,11 @@ body{
     height: 100vh;
 }
 
-/*.flexible{
+.flexible{
     width: 100%;
     height: 100%; 
-    width: 100vw;
-    height: 100vh;
+    /*width: 100vw;
+    height: 100vh;*/
     display:flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -65,7 +65,7 @@ body{
 }
 .p5{margin: 2.5vh 5vw 5vh 2.5vw;
 }
-*/
+
 
 /* Grid junk */
 /* .page {
@@ -111,8 +111,8 @@ body{
 
 .p5{
     grid-column: 16 / 21;
-} */
-
+} 
+*/
 
 /* for future ref
 
