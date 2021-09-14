@@ -27,99 +27,41 @@ body{
     height: 100vh;
 }
 
-.flexible{
-    width: 100%;
-    height: 100%; 
-    /*width: 100vw;
-    height: 100vh;*/
-    display:flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-.page {
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    background-color:rgb(69, 89, 52);
-    margin: 5vh 5vw 5vh 5vw;
-}
-
-
-.top{
-    padding: calc(48.5vh / 2) calc(88vw / 4);
-    margin-bottom: 0;
-}
-
-.bottom{
-    padding: calc(30vh / 2) calc(33% / 3);
-}
-
-.p1{margin: 5vh 1.5vw 0 5vw;
-}
-.p2{margin: 5vh 5vw 0 2.5vw;
-}
-.p3{margin: 2.5vh 2.5vw 5vh 5vw;
-}
-.p4{margin: 2.5vh 2.5vw 5vh 2.5vw;
-}
-.p5{margin: 2.5vh 5vw 5vh 2.5vw;
-}
-
-
-/* Grid junk */
-/* .page {
-    display:flex;
-    justify-content: center;
-    align-items: center;    
-    margin: ;
-    background-color:rgb(69, 89, 52)
-}
-
-.grid {
+.grid{
     display: grid;
-    grid-template-columns:  repeat(21, 1fr);
-    grid-template-rows: 50% 50%;
-    
+    grid: repeat(5, 5fr) / repeat(6, 6fr); /* row/column */
+    gap: 3%;
+
+    /* Why are these necessary???*/
     width: 100vw;
     height: 100vh;
 }
 
-.upper{
-    grid-row: 1 / 2;
+.grid > div{
+    background-color:rgb(69, 89, 52);
+    
 }
 
-.lower{
-    grid-row: 2 / 3;
+.grid > div:nth-child(1){    
+    grid-area: span 3 / span 3;
 }
 
-.p1{
-    grid-column: 2 / 11;
+.grid > div:nth-child(2){
+    grid-area: span 3 / span 3;
 }
 
-.p2{
-    grid-column: 12 / 21;
+.grid > div:nth-child(3){
+    grid-area: span 2 / span 2;
 }
 
-.p3{
-    grid-column: 2 / 8;
+.grid > div:nth-child(4){
+    grid-area: span 2 / span 2;
 }
 
-.p4{
-    grid-column: 9 / 15;
+.grid > div:nth-child(5){
+    grid-area: span 2 / span 2;
 }
 
-.p5{
-    grid-column: 16 / 21;
-} 
-*/
-
-/* for future ref
-
-    instead of saying 33.333%
-    width: calc(100% / 3)
-
-    background color: rgb(205,163,76)
-    box color: rgb(69, 89, 52)
-
-*/
+.splash{
+    display: none;
+}
