@@ -23,8 +23,6 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     background-color: rgb(205,163,76);
     margin: 0;
-    width: 100vw;
-    height: 100vh;
 }
 
 .grid{
@@ -32,9 +30,9 @@ body{
     grid: repeat(5, 5fr) / repeat(6, 6fr); /* row/column */
     gap: 3%;
 
-    /* Why are these necessary???*/
+    /* Why are these necessary???
     width: 100vw;
-    height: 100vh;
+    height: 100vh; */
 }
 
 .grid > div{
@@ -42,26 +40,40 @@ body{
     
 }
 
-.grid > div:nth-child(1){    
+#box1{    
     grid-area: span 3 / span 3;
 }
 
-.grid > div:nth-child(2){
+#box2{
     grid-area: span 3 / span 3;
 }
 
-.grid > div:nth-child(3){
+#box3{
     grid-area: span 2 / span 2;
 }
 
-.grid > div:nth-child(4){
+#box4{
     grid-area: span 2 / span 2;
 }
 
-.grid > div:nth-child(5){
+#box5{
     grid-area: span 2 / span 2;
 }
 
 .splash{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.splash hide{
     display: none;
+    pointer-events: none;
+}
+
+.splash show{
+    display: contents;
+    pointer-events: all;
 }
