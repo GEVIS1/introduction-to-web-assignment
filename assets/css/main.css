@@ -64,6 +64,7 @@ body{
     width: 100vw;
     height: 100vh;
     position: absolute;
+    background-color: #777;
     top: 0;
     left: 0;
 }
