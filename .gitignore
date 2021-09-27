@@ -1,3 +1,9 @@
+# Heroku
+/*.env
+
+# Apple
+.DS_Store
+
 # Logs
 logs
 *.log
