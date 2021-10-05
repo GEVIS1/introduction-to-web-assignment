@@ -65,15 +65,19 @@ body{
     left: 0;
 }
 
-.splash-content{
+.error, .splash-content{
     background-color: var(--dark-olive-green);
     position: relative;
-    margin-top: 20%;
+    top: 40%;
     width: 625px;
     left: calc(50% - 312px); /* Middle point of page - half of width */
     animation-name: fade-in;
     animation-duration: 400ms;
     animation-timing-function: ease;
+}
+
+.error{
+    visibility: hidden;
 }
 
 .text{
