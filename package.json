@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js"
   },
-  "keywords" : [
+  "keywords": [
     "web1",
     "test_site",
     "heroku"
@@ -28,7 +28,7 @@
     "html": "^1.0.0",
     "path": "^0.12.7"
   },
-  "engines" : {
-    "node" : "14.x"
+  "engines": {
+    "node": "14.x"
   }
 }
