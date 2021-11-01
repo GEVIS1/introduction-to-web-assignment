@@ -35,7 +35,8 @@ splashButtons.plus.addEventListener("click", () => {
     // Hide splash and make it non-clickable
     splash.style.visibility = "hidden"
     console.log("Hid splash element!", splash)
-    
+    // Fade in the body
+    grid.classList.add('body-fade-in')
 })
 
 // errorButtons.minus.addEventListener("click", () => {

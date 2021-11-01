@@ -4,7 +4,7 @@
     --peru: rgb(205, 164, 76);
 }
 
-@keyframes fade-in {
+@keyframes splash-fade-in {
 0% {
     transform: scale(50%);
     opacity: 0;
@@ -14,11 +14,28 @@
     opacity: 1;
 }}
 
+@keyframes body-fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+
 body{
     font-family: Arial, Helvetica, sans-serif;
     background-color: rgb(205, 164, 76);
     margin: 0;
     padding: 30px;
+}
+
+.body-fade-in {
+    animation-name: body-fade-in;
+    animation-duration: 400ms;
+    animation-timing-function: ease;
 }
 
 .grid{
@@ -58,13 +75,23 @@ body{
     background-color: var(--peru);
 }
 
+.splash.hide{
+    display: none;
+    pointer-events: none;
+}
+
+.splash.show{
+    display: contents;
+    pointer-events: all;
+}
+
 .error, .splash-content{
     background-color: var(--dark-olive-green);
     position: relative;
     top: 40%;
     width: 625px;
     left: calc(50% - 312px); /* Middle point of page - half of width */
-    animation-name: fade-in;
+    animation-name: splash-fade-in;
     animation-duration: 400ms;
     animation-timing-function: ease;
 }
@@ -121,13 +148,3 @@ body{
     transform: rotateZ(90deg) translate(-50%, 160%);
 }
 /* ========================= */
-
-.splash.hide{
-    display: none;
-    pointer-events: none;
-}
-
-.splash.show{
-    display: contents;
-    pointer-events: all;
-}
