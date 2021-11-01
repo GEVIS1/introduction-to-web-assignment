@@ -26,7 +26,7 @@ console.log(`copy`, copy)
 //====================================================
 
 
-// Button click eventListeners
+// Button click eventListeners =======================
 splashButtons.minus.addEventListener("click", event => {
     // Show error screen and hide splash    
 })
@@ -46,6 +46,7 @@ splashButtons.plus.addEventListener("click", () => {
 // errorButtons.plus.addEventListener("click", () => {
     
 // })
+//====================================================
 
 // Content div event listeners ========================
 content.forEach((div) => {
@@ -67,7 +68,15 @@ content.forEach((div) => {
 // Functions ==========================================
 const animate = (div, startPos) => {
     div.style.gridArea = startPos.gridArea
-
+    
+    let copyStart = 
+    {
+        top: div.getBoundingClientRect().top,
+        left: div.getBoundingClientRect().left,
+        right: div.getBoundingClientRect().right,
+        bottom: div.getBoundingClientRect().bottom
+    }
+    
     let animation = div.animate([
     {
         gridArea: startPos.gridArea
@@ -75,11 +84,38 @@ const animate = (div, startPos) => {
     {
         gridArea: endPos.gridArea
     }
-    ], 300)
+], 300)
 
     animation.onfinish = () => {
         div.style.gridArea = endPos.gridArea
     }
+
+    let copyEnd = 
+    {
+        top: div.getBoundingClientRect().top,
+        left: div.getBoundingClientRect().left,
+        right: div.getBoundingClientRect().right,
+        bottom: div.getBoundingClientRect().bottom
+    }
+    let copyanimation = copy.animate([
+        {
+            top: copyStart.top + "px",
+            left: copyStart.left + "px",
+            height: copyStart.height + "px",
+            width: copyStart.width + "px"
+        },
+        {
+            top: copyEnd.top + "px",
+            left: copyEnd.left + "px",
+            height: copyEnd.height + "px",
+            width: copyEnd.width + "px"
+        }
+    ], 300)
+    
+    console.log(copyStart, copyEnd)
+
+    copyanimation()
+    
 }
 
 const findGridPos = div => {
