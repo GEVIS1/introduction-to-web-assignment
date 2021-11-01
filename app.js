@@ -15,5 +15,5 @@ app.get("/", (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log(`Express http server running on port ${port}.`)
+    console.log('\x1b[34m%s\x1b[0m', `Express http server running on port ${port}.`)
 })

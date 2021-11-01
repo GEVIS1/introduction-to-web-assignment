@@ -4,6 +4,7 @@
   "description": "Introduction to web assignment website repository",
   "main": "app.js",
   "scripts": {
+    "prestart": "npm install",
     "start": "node app.js"
   },
   "keywords": [
