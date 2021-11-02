@@ -12,12 +12,11 @@ const errorButtons = {
     plus: splash.querySelectorAll("#plus").item(1)
 }
 
+const body = document.querySelector("body")
 const grid = document.querySelector(".grid")
 const content = document.querySelectorAll(".box")
 const copy = document.querySelector(".copy")
-const endPos = {
-    gridArea: "1 / 1 / span 4 / span 5"
-}
+const endPos = "1 / 1 / span 4 / span 5"
 
 console.log(`splashButtons`, splashButtons)
 console.log(`errorButtons`, errorButtons)
@@ -25,6 +24,9 @@ console.log(`content`, content)
 console.log(`copy`, copy)
 //====================================================
 
+// Variables =========================================
+let notContent = false
+//====================================================
 
 // Button click eventListeners =======================
 splashButtons.minus.addEventListener("click", event => {
@@ -48,19 +50,56 @@ splashButtons.plus.addEventListener("click", () => {
 // })
 //====================================================
 
+// Body event listener ================================
+body.addEventListener("click", event => {
+
+    notContent = true
+    
+    // Make sure we did not click on content
+    content.forEach( div => {
+        if (div == event.target) 
+        {
+            console.log("This div is content!")
+            notContent = false
+        }
+    })
+
+    console.log('notContent', notContent)
+    console.log(content)
+    if (notContent){
+        content.forEach(div => {
+            // Break if we're in the default layout
+            if (div.getAttribute("style") == null) return
+
+            // We are not in the default layout, so go back to it
+            div.removeAttribute("style")
+        })
+    }
+})
+//=====================================================
+
 // Content div event listeners ========================
 content.forEach((div) => {
     div.addEventListener("click", event => {
         console.log("You clicked on:", event.target)
         console.log("Changing column layout!")
-        const startPos = findGridPos(event.target)
+        //const startPos = findGridPos(event.target)
 
+        // Position all the divs
         content.forEach((div) => {
-            div.style.gridColumn = "6 / span 1"
-            div.style.gridRow = "span 1"
+            
+            // If it's not the clicked div put it in the right most column
+            if (div != event.target) {
+                div.style.gridColumn = "6 / span 1"
+                div.style.gridRow = "span 1"
+            }
+            // Put the clicked div on the left
+            else {
+                div.style.gridArea = endPos;
+            }
         })
 
-        animate(event.target, startPos)
+        // animate(event.target, startPos)
     })
 })
 // ====================================================
@@ -118,6 +157,7 @@ const animate = (div, startPos) => {
     
 }
 
+// Function to find a div's current gridArea
 const findGridPos = div => {
     const index = Array.from(content).indexOf(div)
     console.log("The index of the clicked div is:", index)
