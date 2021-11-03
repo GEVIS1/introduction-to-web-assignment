@@ -51,6 +51,7 @@ body{
 }
 
 .box{    
+    font-size: 100px;
     grid-row: span 2;
     grid-column: span 3;
 }
@@ -60,10 +61,11 @@ body{
 }
 
 .copy{
-    position: relative;
+    position: absolute;
+    background-color: blue;
     top: 0;
     left: 0;
-    visibility: hidden;
+    visibility: invisible;
 }
 
 .splash{

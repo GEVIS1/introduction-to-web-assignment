@@ -64,9 +64,11 @@ body.addEventListener("click", event => {
         }
     })
 
-    console.log('notContent', notContent)
-    console.log(content)
+    
     if (notContent){
+        // We clicked away from content, so hide the copy
+        copy.style.visibility = "hidden"
+
         content.forEach(div => {
             // Break if we're in the default layout
             if (div.getAttribute("style") == null) return
@@ -81,8 +83,6 @@ body.addEventListener("click", event => {
 // Content div event listeners ========================
 content.forEach((div) => {
     div.addEventListener("click", event => {
-        console.log("You clicked on:", event.target)
-        console.log("Changing column layout!")
         //const startPos = findGridPos(event.target)
 
         // Position all the divs
@@ -93,67 +93,75 @@ content.forEach((div) => {
                 div.style.gridColumn = "6 / span 1"
                 div.style.gridRow = "span 1"
             }
-            // Put the clicked div on the left
+            // Put the clicked div on the left and animate it
             else {
+                // Save the content div's location
+                const start = div.getBoundingClientRect()
+                // Move the content div
                 div.style.gridArea = endPos;
+                // Save the content div's new location
+                const end = div.getBoundingClientRect()
+                // Make the copy visible
+                copy.style.visibility = "visible"
+                // Animate the copy like it was the content div
+                animate(div, copy, start, end)
             }
         })
-
-        // animate(event.target, startPos)
     })
 })
 // ====================================================
 
 // Functions ==========================================
-const animate = (div, startPos) => {
-    div.style.gridArea = startPos.gridArea
-    
-    let copyStart = 
-    {
-        top: div.getBoundingClientRect().top,
-        left: div.getBoundingClientRect().left,
-        right: div.getBoundingClientRect().right,
-        bottom: div.getBoundingClientRect().bottom
-    }
-    
-    let animation = div.animate([
-    {
-        gridArea: startPos.gridArea
-    },
-    {
-        gridArea: endPos.gridArea
-    }
-], 300)
+const animate = (div, copy, startPos, endPos) => {
 
-    animation.onfinish = () => {
-        div.style.gridArea = endPos.gridArea
-    }
-
-    let copyEnd = 
-    {
-        top: div.getBoundingClientRect().top,
-        left: div.getBoundingClientRect().left,
-        right: div.getBoundingClientRect().right,
-        bottom: div.getBoundingClientRect().bottom
-    }
-    let copyanimation = copy.animate([
+    let copyAnimation = copy.animate(
         {
-            top: copyStart.top + "px",
-            left: copyStart.left + "px",
-            height: copyStart.height + "px",
-            width: copyStart.width + "px"
-        },
-        {
-            top: copyEnd.top + "px",
-            left: copyEnd.left + "px",
-            height: copyEnd.height + "px",
-            width: copyEnd.width + "px"
-        }
-    ], 300)
-    
-    console.log(copyStart, copyEnd)
+            top:    [startPos.top + "px",      endPos.top + "px"],
+            left:   [startPos.left + "px",     endPos.left + "px"],
+            width:  [startPos.width + "px",    endPos.width + "px"],
+            height: [startPos.height + "px",   endPos.height + "px"]
+        }, 300)
 
-    copyanimation()
+    
+
+    copyAnimation.onfinish = () => {
+        copy.style.top = endPos.top + "px"
+        copy.style.left = endPos.left + "px"
+        copy.style.width = endPos.width + "px"
+        copy.style.height = endPos.height + "px"
+        // Hide the copy once it's done its job
+        copy.style.visibility = "hidden"
+    }
+
+    // let copyAnimation = copy.animate(
+    //     {
+    //         top:    [endPos.top + "px",        startPos.top + "px"],
+    //         left:   [endPos.left + "px",       startPos.left + "px"],
+    //         width:  [endPos.width + "px",      startPos.width + "px"],
+    //         height: [endPos.height + "px",     startPos.height + "px"]
+    //     }, 300)
+
+    // animation.onfinish = () => {
+    //     div.style.gridArea = endPos.gridArea
+    // }
+    // let copyanimation = copy.animate([
+    //     {
+    //         top: copyStart.top + "px",
+    //         left: copyStart.left + "px",
+    //         height: copyStart.height + "px",
+    //         width: copyStart.width + "px"
+    //     },
+    //     {
+    //         top: copyEnd.top + "px",
+    //         left: copyEnd.left + "px",
+    //         height: copyEnd.height + "px",
+    //         width: copyEnd.width + "px"
+    //     }
+    // ], 300)
+    
+    // console.log(copyStart, copyEnd)
+
+    // copyanimation()
     
 }
 
