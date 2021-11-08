@@ -2,14 +2,16 @@ console.log("Successfully loaded the JS file!")
 
 // Fetch elements =========================
 const splash = document.querySelector(".splash")
+const splashContent = splash.querySelector(".splash-content")
 const splashButtons = {
-    minus: splash.querySelectorAll("#minus").item(0),
-    plus: splash.querySelectorAll("#plus").item(0)
+    minus: splashContent.querySelectorAll(".buttons > .minus"),
+    plus: splashContent.querySelectorAll(".buttons > .plus")
 }
 
+const error = splash.querySelector(".error")
 const errorButtons = {
-    minus: splash.querySelectorAll("#minus").item(1),
-    plus: splash.querySelectorAll("#plus").item(1)
+    minus: splash.querySelectorAll(".buttons > .minus"),
+    plus: splash.querySelectorAll(".buttons > .plus")
 }
 
 const body = document.querySelector("body")
@@ -35,11 +37,11 @@ console.log(`content`, content)
 //====================================================
 
 // Button click eventListeners =======================
-splashButtons.minus.addEventListener("click", event => {
+splashButtons.minus.item(0).addEventListener("click", event => {
     // Show error screen and hide splash    
 })
 
-splashButtons.plus.addEventListener("click", () => {
+splashButtons.plus.item(0).addEventListener("click", () => {
     // Hide splash and make it non-clickable
     splash.style.visibility = "hidden"
     console.log("Hid splash element!", splash)
