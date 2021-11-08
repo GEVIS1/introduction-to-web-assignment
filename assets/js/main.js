@@ -15,17 +15,19 @@ const errorButtons = {
 const body = document.querySelector("body")
 const grid = document.querySelector(".grid")
 const content = document.querySelectorAll(".box")
-const copy = document.querySelector(".copy")
-const endPos = "1 / 1 / span 4 / span 5"
+const gridEndPos = "1 / 1 / span 4 / span 5"
 
 console.log(`splashButtons`, splashButtons)
 console.log(`errorButtons`, errorButtons)
 console.log(`content`, content)
-console.log(`copy`, copy)
 //====================================================
 
 // Variables =========================================
-let notContent = false
+    // Boolean flag storing if the last click was on content or the document body
+    let notContent = false
+
+    // This will hold a reference to the element that's selected in the second layout
+    let selectedElement = null;
 //====================================================
 
 // Button click eventListeners =======================
@@ -64,17 +66,31 @@ body.addEventListener("click", event => {
         }
     })
 
-    
-    if (notContent){
-        // We clicked away from content, so hide the copy
-        copy.style.visibility = "hidden"
-
+    // If we clicked on the body and we are not in the default layout
+    // When the content is in the second layout it will have style attributes applied
+    if (notContent /*&& content[0].classList.contains("style")*/){
+        selectedElement = null;
+        console.log("This div is not content! Going back to default layout.")
         content.forEach(div => {
-            // Break if we're in the default layout
-            if (div.getAttribute("style") == null) return
+            // Hide div while animation is happening
+                div.style.visibility = "hidden"
 
-            // We are not in the default layout, so go back to it
-            div.removeAttribute("style")
+            // Animating the copy of the div ============
+                // Make a copy of the div 
+                const copy = createCopy()
+
+                // Save the content div's location
+                const start = div.getBoundingClientRect()
+                
+                // We are not in the default layout, so go back to it
+                div.removeAttribute("style")
+
+                // Save the content div's new location
+                const end = div.getBoundingClientRect()
+
+                // Animate it to the new location
+                animate(div, copy, start, end)
+            //===========================================
         })
     }
 })
@@ -83,30 +99,48 @@ body.addEventListener("click", event => {
 // Content div event listeners ========================
 content.forEach((div) => {
     div.addEventListener("click", event => {
-        //const startPos = findGridPos(event.target)
+        
+        // Only animate if we are not in the second layout, or we are in the second layout and an un-focused div was clicked
+        //if (event.target == selectedElement) {
+            // Position all the divs
+            content.forEach((div) => {
 
-        // Position all the divs
-        content.forEach((div) => {
-            
-            // If it's not the clicked div put it in the right most column
-            if (div != event.target) {
-                div.style.gridColumn = "6 / span 1"
-                div.style.gridRow = "span 1"
-            }
-            // Put the clicked div on the left and animate it
-            else {
-                // Save the content div's location
-                const start = div.getBoundingClientRect()
-                // Move the content div
-                div.style.gridArea = endPos;
-                // Save the content div's new location
-                const end = div.getBoundingClientRect()
-                // Make the copy visible
-                copy.style.visibility = "visible"
-                // Animate the copy like it was the content div
-                animate(div, copy, start, end)
-            }
-        })
+                // Create a copy of the div
+                const copy = createCopy()
+
+                // If it's not the clicked div put it in the right most column
+                if (div != event.target) {
+
+                    // Save the content div's location
+                    const start = div.getBoundingClientRect()                    
+                    // Move the content div
+                    div.style.gridColumn = "6 / span 1"
+                    div.style.gridRow = "span 1"
+                    // Save the content div's new location
+                    const end = div.getBoundingClientRect()
+                    // Make it invisible while the animation is running
+                    div.style.visibility = "hidden"
+                    // Animate it to the new location
+                    animate(div, copy, start, end)
+                }
+                // Put the clicked div on the left and animate it
+                else {
+                    // Store the clicked div in selectedElement
+                    selectedElement = div
+                    // Save the content div's location
+                    const start = div.getBoundingClientRect()
+                    // Move the content div
+                    div.style.gridArea = gridEndPos;
+                    // Save the content div's new location
+                    const end = div.getBoundingClientRect()
+                    console.log('end', div.innerText, end, div)
+                    // Hide the div
+                    div.style.visibility = "hidden"
+                    // Animate the copy like it was the content div
+                    animate(div, copy, start, end)
+                }
+            })
+        //}
     })
 })
 // ====================================================
@@ -116,13 +150,12 @@ const animate = (div, copy, startPos, endPos) => {
 
     let copyAnimation = copy.animate(
         {
+            visibility: ["visible","visible"],
             top:    [startPos.top + "px",      endPos.top + "px"],
             left:   [startPos.left + "px",     endPos.left + "px"],
             width:  [startPos.width + "px",    endPos.width + "px"],
             height: [startPos.height + "px",   endPos.height + "px"]
         }, 300)
-
-    
 
     copyAnimation.onfinish = () => {
         copy.style.top = endPos.top + "px"
@@ -131,6 +164,10 @@ const animate = (div, copy, startPos, endPos) => {
         copy.style.height = endPos.height + "px"
         // Hide the copy once it's done its job
         copy.style.visibility = "hidden"
+        // Show the moved div
+        div.style.visibility = "visible"
+        // Erase the copy
+        grid.removeChild(copy)
     }
 
     // let copyAnimation = copy.animate(
@@ -184,4 +221,12 @@ const findGridPos = div => {
     }
     console.log(`gridArea`, gridArea)
     return gridArea
+}
+
+// Function that makes a copy of a div
+const createCopy = () => {
+    const copy = document.createElement("div")
+    copy.classList.add("copy")
+    grid.append(copy)
+    return copy
 }
