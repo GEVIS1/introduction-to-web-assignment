@@ -117,7 +117,7 @@ body{
     margin: auto 1ch;
 }
 
-#plus, #minus{
+.plus, .minus{
     background-color: var(--dark-slate-gray);
     height: 50px;
     width: 50px;
@@ -128,7 +128,7 @@ body{
     transition-delay: 0ms;
 }
 
-#plus:hover, #minus:hover{
+.plus:hover, .minus:hover{
     background-color: var(--peru);
 }
 .horizontal, .vertical{
