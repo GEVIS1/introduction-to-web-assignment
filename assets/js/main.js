@@ -26,8 +26,12 @@ console.log(`content`, content)
     // Boolean flag storing if the last click was on content or the document body
     let notContent = false
 
-    // This will hold a reference to the element that's selected in the second layout
+    // This variable stores the element currently selected in the second layout
+    // It will be null if we are not in the first layout
     let selectedElement = null;
+
+    // This boolean is used to check what layout we are in
+    let secondLayout = false;
 //====================================================
 
 // Button click eventListeners =======================
@@ -66,15 +70,12 @@ body.addEventListener("click", event => {
         }
     })
 
-    // If we clicked on the body and we are not in the default layout
-    // When the content is in the second layout it will have style attributes applied
-    if (notContent /*&& content[0].classList.contains("style")*/){
-        selectedElement = null;
+    // If we clicked on the body and we are in the second layout
+    if (notContent && secondLayout){
+        secondLayout = false
+        selectedElement = null
         console.log("This div is not content! Going back to default layout.")
         content.forEach(div => {
-            // Hide div while animation is happening
-                div.style.visibility = "hidden"
-
             // Animating the copy of the div ============
                 // Make a copy of the div 
                 const copy = createCopy()
@@ -101,7 +102,7 @@ content.forEach((div) => {
     div.addEventListener("click", event => {
         
         // Only animate if we are not in the second layout, or we are in the second layout and an un-focused div was clicked
-        //if (event.target == selectedElement) {
+        if (!secondLayout || event.target != selectedElement) {
             // Position all the divs
             content.forEach((div) => {
 
@@ -118,8 +119,6 @@ content.forEach((div) => {
                     div.style.gridRow = "span 1"
                     // Save the content div's new location
                     const end = div.getBoundingClientRect()
-                    // Make it invisible while the animation is running
-                    div.style.visibility = "hidden"
                     // Animate it to the new location
                     animate(div, copy, start, end)
                 }
@@ -127,6 +126,8 @@ content.forEach((div) => {
                 else {
                     // Store the clicked div in selectedElement
                     selectedElement = div
+                    // Set the secondLayout flag to true
+                    secondLayout = true
                     // Save the content div's location
                     const start = div.getBoundingClientRect()
                     // Move the content div
@@ -134,19 +135,20 @@ content.forEach((div) => {
                     // Save the content div's new location
                     const end = div.getBoundingClientRect()
                     console.log('end', div.innerText, end, div)
-                    // Hide the div
-                    div.style.visibility = "hidden"
                     // Animate the copy like it was the content div
                     animate(div, copy, start, end)
                 }
             })
-        //}
+        }
     })
 })
 // ====================================================
 
 // Functions ==========================================
 const animate = (div, copy, startPos, endPos) => {
+
+    // Hide the content div before animating
+    div.style.visibility = "hidden"
 
     let copyAnimation = copy.animate(
         {
