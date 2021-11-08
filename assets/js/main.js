@@ -134,7 +134,6 @@ content.forEach((div) => {
                     div.style.gridArea = gridEndPos;
                     // Save the content div's new location
                     const end = div.getBoundingClientRect()
-                    console.log('end', div.innerText, end, div)
                     // Animate the copy like it was the content div
                     animate(div, copy, start, end)
                 }
