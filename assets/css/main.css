@@ -39,7 +39,6 @@ body{
 }
 
 .grid{
-    position:relative;
     height: calc(100vh - 60px); /* This seems hacky.. ask Adon about this*/
     grid-gap: 30px; /* Why does my grid have a gap on the bottom?? */
     display: grid;
@@ -63,8 +62,6 @@ body{
 .copy{
     position: absolute;
     background-color: blue;
-    top: 0;
-    left: 0;
     visibility: invisible;
 }
 
