@@ -53,6 +53,7 @@ body{
     font-size: 100px;
     grid-row: span 2;
     grid-column: span 3;
+    overflow: hidden;  
 }
 
 .box.bottom{
