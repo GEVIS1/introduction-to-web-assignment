@@ -53,6 +53,29 @@
                                           ▀▀                                         
 */
 
+@media (max-width: 800px)  {
+    .grid{
+        height: calc(100vh)!important;
+        grid-gap: 30px!important;
+        display: grid!important;
+        grid: repeat(5, 1fr) / 1fr!important; /* row/column */
+    }
+
+    .box.bottom,
+    .box{    
+        font-size: 100px!important;
+        grid-row: span 1!important;
+        grid-column: span 2!important;
+        overflow: hidden!important;  
+    }
+    
+    .copy{
+        position: absolute!important;
+        background-color: blue!important;
+        visibility: invisible!important;
+    }
+}
+
 /*
  
  ████████████████     ███████████████████████████ ██████ ███████ 
@@ -97,8 +120,8 @@ body{
 */
 
 .grid{
-    height: calc(100vh - 60px); /* This seems hacky.. ask Adon about this*/
-    grid-gap: 30px; /* Why does my grid have a gap on the bottom?? */
+    height: calc(100vh - 60px);
+    grid-gap: 30px; 
     display: grid;
     grid: repeat(4, 1fr) / repeat(6, 1fr); /* row/column */
 }
@@ -123,7 +146,6 @@ body{
     background-color: blue;
     visibility: invisible;
 }
-
 
 /*
  
