@@ -1,6 +1,17 @@
 console.log("Successfully loaded the JS file!")
 
-// Fetch elements =========================
+
+/*
+ 
+  ██████ ██    █████████████████    ██    ████████████████     ███████████████████████████ ██████ ███████ 
+ ██    ████    ████     ██   ████  ██     ██     ██     ██     ██    ██        ██  ██    ████   ████      
+ ██    ████    ███████  ██████  ████      ████████████  ██     █████ ██        ██  ██    ████████ ███████ 
+ ██ ▄▄ ████    ████     ██   ██  ██            ████     ██     ██    ██        ██  ██    ████   ██     ██ 
+  ██████  ██████ █████████   ██  ██       ██████████████████████████████████   ██   ██████ ██   █████████ 
+     ▀▀                                                                                                   
+                                                                                                          
+ 
+*/
 const splash = document.querySelector(".splash")
 const splashContent = splash.querySelector(".splash-content")
 const splashButtons = {
@@ -24,7 +35,17 @@ console.log(`errorButtons`, errorButtons)
 console.log(`content`, content)
 //====================================================
 
-// Variables =========================================
+/*
+ 
+ ██    ██ █████ ██████ ██ █████ ██████ ██     ██████████████ 
+ ██    ████   ████   ██████   ████   ████     ██     ██      
+ ██    ███████████████ ███████████████ ██     █████  ███████ 
+  ██  ██ ██   ████   ██████   ████   ████     ██          ██ 
+   ████  ██   ████   ██████   ████████ █████████████████████ 
+                                                             
+                                                             
+ 
+*/
     // Boolean flag storing if the last click was on content or the document body
     let notContent = false
 
@@ -58,7 +79,28 @@ splashButtons.plus.item(0).addEventListener("click", () => {
 // })
 //====================================================
 
-// Body event listener ================================
+/*
+ 
+ █████████    ████████████    ██████████    ██     ███████████████████████████    ███████████████ ███████ 
+ ██     ██    ████     ████   ██   ██       ██     ████        ██   ██     ████   ████     ██   ████      
+ █████  ██    ███████  ██ ██  ██   ██       ██     █████████   ██   █████  ██ ██  ███████  ██████ ███████ 
+ ██      ██  ██ ██     ██  ██ ██   ██       ██     ██     ██   ██   ██     ██  ██ ████     ██   ██     ██ 
+ ███████  ████  █████████   ████   ██       ████████████████   ██   █████████   █████████████   █████████ 
+                                                                                                          
+                                                                                                          
+ 
+*/
+
+/*
+ 
+   ___          _      
+  | _ ) ___  __| |_  _ 
+  | _ \/ _ \/ _` | || |
+  |___/\___/\__,_|\_, |
+                  |__/ 
+ 
+*/
+
 body.addEventListener("click", event => {
 
     notContent = true
@@ -99,7 +141,18 @@ body.addEventListener("click", event => {
 })
 //=====================================================
 
-// Content div event listeners ========================
+/*
+ 
+    ___         _           _   
+   / __|___ _ _| |_ ___ _ _| |_ 
+  | (__/ _ \ ' \  _/ -_) ' \  _|
+   \___\___/_||_\__\___|_||_\__|
+                                
+ 
+*/
+/**
+ * Add an on click event listener to each div in the grid.
+ */
 content.forEach((div) => {
     div.addEventListener("click", event => {
         
@@ -145,7 +198,25 @@ content.forEach((div) => {
 })
 // ====================================================
 
-// Functions ==========================================
+/*
+ 
+ █████████    █████    ██ ████████████████ ██████ ███    █████████ 
+ ██     ██    ██████   ████        ██   ████    ██████   ████      
+ █████  ██    ████ ██  ████        ██   ████    ████ ██  █████████ 
+ ██     ██    ████  ██ ████        ██   ████    ████  ██ ██     ██ 
+ ██      ██████ ██   ████ ██████   ██   ██ ██████ ██   ███████████ 
+ 
+*/
+
+/**
+ * Fakes the tweened movement of div from startPos to endPos by moving a clone in its place.
+ * The div will be hidden and the copy visible at the start and once the animation is over the copy is hidden,
+ * the div is shown and then the copy is deleted from the DOM.
+ * @param {HTMLDivElement} div 
+ * @param {HTMLDivElement} copy 
+ * @param {DOMRect} startPos 
+ * @param {DOMRect} endPos 
+ */
 const animate = (div, copy, startPos, endPos) => {
 
     // Hide the content div before animating
@@ -171,41 +242,14 @@ const animate = (div, copy, startPos, endPos) => {
         div.style.visibility = "visible"
         // Erase the copy
         grid.removeChild(copy)
-    }
-
-    // let copyAnimation = copy.animate(
-    //     {
-    //         top:    [endPos.top + "px",        startPos.top + "px"],
-    //         left:   [endPos.left + "px",       startPos.left + "px"],
-    //         width:  [endPos.width + "px",      startPos.width + "px"],
-    //         height: [endPos.height + "px",     startPos.height + "px"]
-    //     }, 300)
-
-    // animation.onfinish = () => {
-    //     div.style.gridArea = endPos.gridArea
-    // }
-    // let copyanimation = copy.animate([
-    //     {
-    //         top: copyStart.top + "px",
-    //         left: copyStart.left + "px",
-    //         height: copyStart.height + "px",
-    //         width: copyStart.width + "px"
-    //     },
-    //     {
-    //         top: copyEnd.top + "px",
-    //         left: copyEnd.left + "px",
-    //         height: copyEnd.height + "px",
-    //         width: copyEnd.width + "px"
-    //     }
-    // ], 300)
-    
-    // console.log(copyStart, copyEnd)
-
-    // copyanimation()
-    
+    } 
 }
 
-// Function to find a div's current gridArea
+/**
+ * Find a div's current gridArea
+ * @param {HTMLDivElement} div 
+ * @returns gridArea
+ */
 const findGridPos = div => {
     const index = Array.from(content).indexOf(div)
     console.log("The index of the clicked div is:", index)
@@ -226,7 +270,10 @@ const findGridPos = div => {
     return gridArea
 }
 
-// Function that makes a copy of a div
+/**
+ * Make a copy of a div and append it to the grid
+ * @returns A reference to the copy div element
+ */
 const createCopy = () => {
     const copy = document.createElement("div")
     copy.classList.add("copy")
